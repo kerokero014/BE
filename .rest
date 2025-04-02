@@ -1,0 +1,13 @@
+POST http://localhost:5000/auth/register
+Content-Type: application/json
+
+{
+  "email": "kevinjrm.kr@gmail.com",
+  "password": "password",
+  "firstName": "Kevin",
+  "lastName": "Klein"
+}
+
+###
+GET http://localhost:5000/users/2
+Content-Type: application/json
