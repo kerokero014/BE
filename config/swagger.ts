@@ -10,11 +10,22 @@ const options = {
             version: '1.0.0',
             description: 'Documentation for the CHEFGPT API',
         },
+        components: {
+            securitySchemes: {
+                BearerAuth: {
+                    type: 'http',
+                    scheme: 'bearer',
+                    bearerFormat: 'JWT',
+                    description: 'Enter JWT token in the format: Bearer {token}',
+                },
+            },
+        },
         servers: [
             {
                 url: 'http://localhost:5000', // Update this to match your server URL
             },
         ],
+        security: [{ bearerAuth: [] }],
     },
     apis: ['./routes/*.ts'], // Path to your route files
 };
