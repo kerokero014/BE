@@ -27,3 +27,15 @@ export const getAllergiesByUserId = async (userId: number) => {
         },
     });
 };
+
+export const updateAllergy = async (userId: number, allergyId: number, newAllergyName: string) => {
+    return prisma.allergy.update({
+        where: {
+            id: allergyId,
+            userId,
+        },
+        data: {
+            name: newAllergyName,
+        },
+    });
+};

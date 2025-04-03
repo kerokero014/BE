@@ -1,4 +1,9 @@
-import { addAllergy, removeAllergy, getAllergiesByUserId } from '../models/allergy.model';
+import {
+    addAllergy,
+    removeAllergy,
+    getAllergiesByUserId,
+    updateAllergy,
+} from '../models/allergy.model';
 
 export const addAllergyService = async (userId: number, allergyName: string) => {
     // Check if allergy already exists for the user
@@ -16,4 +21,12 @@ export const removeAllergyService = async (userId: number, allergyId: number) =>
 
 export const getAllergiesByUserIdService = async (userId: number) => {
     return getAllergiesByUserId(userId);
+};
+
+export const updateAllergyService = async (
+    userId: number,
+    allergyId: number,
+    newAllergyName: string,
+) => {
+    return updateAllergy(userId, allergyId, newAllergyName);
 };

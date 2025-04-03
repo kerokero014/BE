@@ -3,6 +3,7 @@ import {
     addAllergyController,
     removeAllergyController,
     getAllergiesByUserIdController,
+    updateAllergyController,
 } from '../controllers/allergyController';
 import { authenticate } from '../middleware/auth.middleware';
 
@@ -77,5 +78,59 @@ router.delete('/:userId/:allergyId', authenticate, removeAllergyController);
  *         description: Failed to fetch allergies
  */
 router.get('/:userId', authenticate, getAllergiesByUserIdController);
+
+/**
+ * @swagger
+ * /allergies/{userId}/{allergyId}:
+ *   put:
+ *     summary: Update an allergy for a user
+ *     tags: [Allergies]
+ *     parameters:
+ *       - in: path
+ *         name: userId
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID of the user
+ *       - in: path
+ *         name: allergyId
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID of the allergy to update
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - allergyName
+ *             properties:
+ *               allergyName:
+ *                 type: string
+ *                 description: The new name of the allergy
+ *     responses:
+ *       200:
+ *         description: Allergy updated successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: integer
+ *                 name:
+ *                   type: string
+ *                 userId:
+ *                   type: integer
+ *       400:
+ *         description: Bad request (missing required fields)
+ *       404:
+ *         description: Allergy not found or user not authorized
+ *       500:
+ *         description: Internal server error
+ */
+router.put('/:userId/:allergyId', authenticate, updateAllergyController);
 
 export default router;
