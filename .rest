@@ -9,5 +9,12 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:5000/users/2
+GET http://localhost:5000/users/10
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsImVtYWlsIjoic2F1bEtsZWluQGdtYWlsLmNvbSIsImlhdCI6MTc0MzcyOTQ4MiwiZXhwIjoxNzQ0MzM0MjgyfQ.fg00pXcChxBAeXAx8D0bPe0DUX8AwltqomSnrg-vtzE
+Content-Type: application/json
+
+
+###
+GET http://localhost:5000/allegies/10
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsImVtYWlsIjoic2F1bEtsZWluQGdtYWlsLmNvbSIsImlhdCI6MTc0MzcyOTQ4MiwiZXhwIjoxNzQ0MzM0MjgyfQ.fg00pXcChxBAeXAx8D0bPe0DUX8AwltqomSnrg-vtzE
 Content-Type: application/json
