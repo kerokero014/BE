@@ -6,11 +6,17 @@ import { ZodError } from 'zod';
 
 export const createRecipe = async (req: Request, res: Response) => {
     try {
-        const { title, instructions, nutritionalValue, description } = req.body;
-        await RecipeSchema.parseAsync({ title, instructions, nutritionalValue, description });
-        const recipe = await recipeService.createRecipe(
+        const { title, instructions, nutritionalValue, description, steps } = req.body;
+        await RecipeSchema.parseAsync({
             title,
             instructions,
+            nutritionalValue,
+            description,
+            steps,
+        });
+        const recipe = await recipeService.createRecipe(
+            title,
+            steps, // Pass steps to the service
             nutritionalValue,
             description,
         );
@@ -18,10 +24,11 @@ export const createRecipe = async (req: Request, res: Response) => {
     } catch (error) {
         if (error instanceof ZodError) {
             res.status(400).json({ error: error.errors });
+        } else {
+            res.status(500).json({ error: 'Failed to create recipe' });
         }
     }
 };
-
 export const getAllRecipes = async (req: Request, res: Response) => {
     try {
         const recipes = await recipeService.getAllRecipes();
@@ -48,12 +55,18 @@ export const getRecipeById = async (req: Request, res: Response) => {
 export const updateRecipe = async (req: Request, res: Response) => {
     try {
         const { id } = req.params;
-        const { title, instructions, nutritionalValue, description } = req.body;
-        await RecipeSchema.parseAsync({ title, instructions, nutritionalValue, description });
+        const { title, instructions, nutritionalValue, description, steps } = req.body;
+        await RecipeSchema.parseAsync({
+            title,
+            instructions,
+            nutritionalValue,
+            description,
+            steps,
+        });
         const recipe = await recipeService.updateRecipe(
             Number(id),
             title,
-            instructions,
+            steps,
             nutritionalValue,
             description,
         );
@@ -61,6 +74,8 @@ export const updateRecipe = async (req: Request, res: Response) => {
     } catch (error) {
         if (error instanceof ZodError) {
             res.status(400).json({ error: error.errors });
+        } else {
+            res.status(500).json({ error: 'Failed to update recipe' });
         }
     }
 };

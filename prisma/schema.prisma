@@ -39,6 +39,7 @@ model Dislike {
   name   String
   userId Int
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
   @@unique([name, userId])
 }
 
@@ -47,6 +48,7 @@ model FavoriteFood {
   name   String
   userId Int
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
   @@unique([name, userId])
 }
 
@@ -54,12 +56,20 @@ model Recipe {
   id                Int                @id @default(autoincrement())
   title             String
   description       String
-  instructions      String
   nutritionalValue  String
   createdAt         DateTime           @default(now())
   savedRecipes      SavedRecipe[]
   meals             Meal[]
   recipeIngredients RecipeIngredient[]
+  steps             RecipeStep[]
+}
+
+model RecipeStep {
+  id       Int    @id @default(autoincrement())
+  step     String
+  order    Int 
+  recipeId Int
+  recipe   Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
 }
 
 model RecipeIngredient {

@@ -3,12 +3,23 @@ import prisma from '../prisma/seed';
 
 export const createRecipe = async (
     title: string,
-    instructions: string,
+    steps: { step: string; order: number }[], // Must have both steps'step' and 'order'
     nutritionalValue: string,
     description: string,
 ) => {
     return prisma.recipe.create({
-        data: { title, instructions, nutritionalValue, description },
+        data: {
+            title,
+            description,
+            nutritionalValue,
+            steps: {
+                // Create related RecipeStep records
+                create: steps.map((step) => ({
+                    step: step.step,
+                    order: step.order,
+                })),
+            },
+        },
     });
 };
 
@@ -25,13 +36,24 @@ export const getRecipeById = async (id: number) => {
 export const updateRecipe = async (
     id: number,
     title: string,
-    instructions: string,
+    steps: { step: string; order: number }[], // Expect steps with both 'step' and 'order'
     nutritionalValue: string,
     description: string,
 ) => {
     return prisma.recipe.update({
         where: { id },
-        data: { title, instructions, nutritionalValue, description },
+        data: {
+            title,
+            description,
+            nutritionalValue,
+            steps: {
+                deleteMany: {}, // Clear existing steps before updating
+                create: steps.map((step) => ({
+                    step: step.step,
+                    order: step.order,
+                })),
+            },
+        },
     });
 };
 

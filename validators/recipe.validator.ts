@@ -1,9 +1,14 @@
-// validators/recipeValidator.ts
 import { z } from 'zod';
 
 export const RecipeSchema = z.object({
-    title: z.string().min(3),
-    instructions: z.string().min(10),
+    title: z.string(),
+    instructions: z.string(),
     nutritionalValue: z.string(),
-    description: z.string().min(3),
+    description: z.string(),
+    steps: z.array(
+        z.object({
+            step: z.string(),
+            order: z.number(),
+        })
+    ),
 });
