@@ -30,6 +30,15 @@ export const getAllRecipes = async () => {
 export const getRecipeById = async (id: number) => {
     return prisma.recipe.findUnique({
         where: { id },
+        include: {
+            steps: true,
+            recipeIngredients: {
+                include: {
+                    ingredient: true,
+                },
+            },
+            meals: true,
+        },
     });
 };
 

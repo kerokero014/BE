@@ -1,10 +1,10 @@
 import express from 'express';
 import {
-    getAllRecipes,
-    getRecipeById,
-    createRecipe,
-    updateRecipe,
-    deleteRecipe,
+    createRecipeController,
+    getAllRecipesController,
+    getRecipeByIdController,
+    updateRecipeController,
+    deleteRecipeController,
 } from '../controllers/recipeController';
 import { authenticate } from '../middleware/auth.middleware';
 
@@ -35,7 +35,7 @@ const router = express.Router();
  *                     items:
  *                       type: string
  */
-router.get('/', authenticate, getAllRecipes);
+router.get('/', authenticate, getAllRecipesController);
 
 /**
  * @swagger
@@ -56,7 +56,7 @@ router.get('/', authenticate, getAllRecipes);
  *       404:
  *         description: Recipe not found
  */
-router.get('/:id', authenticate, getRecipeById);
+router.get('/:id', authenticate, getRecipeByIdController);
 
 /**
  * @swagger
@@ -70,20 +70,40 @@ router.get('/:id', authenticate, getRecipeById);
  *         application/json:
  *           schema:
  *             type: object
+ *             required:
+ *               - title
+ *               - instructions
+ *               - nutritionalValue
+ *               - description
+ *               - steps
  *             properties:
- *               name:
+ *               title:
  *                 type: string
- *               ingredients:
+ *               instructions:
+ *                 type: string
+ *               nutritionalValue:
+ *                 type: string
+ *               description:
+ *                 type: string
+ *               steps:
  *                 type: array
  *                 items:
- *                   type: string
+ *                   type: object
+ *                   required:
+ *                     - step
+ *                     - order
+ *                   properties:
+ *                     step:
+ *                       type: string
+ *                     order:
+ *                       type: integer
  *     responses:
  *       201:
  *         description: Recipe created successfully
  *       400:
  *         description: Validation error
  */
-router.post('/', authenticate, createRecipe);
+router.post('/', authenticate, createRecipeController);
 
 /**
  * @swagger
@@ -104,20 +124,40 @@ router.post('/', authenticate, createRecipe);
  *         application/json:
  *           schema:
  *             type: object
+ *             required:
+ *               - title
+ *               - instructions
+ *               - nutritionalValue
+ *               - description
+ *               - steps
  *             properties:
- *               name:
+ *               title:
  *                 type: string
- *               ingredients:
+ *               instructions:
+ *                 type: string
+ *               nutritionalValue:
+ *                 type: string
+ *               description:
+ *                 type: string
+ *               steps:
  *                 type: array
  *                 items:
- *                   type: string
+ *                   type: object
+ *                   required:
+ *                     - step
+ *                     - order
+ *                   properties:
+ *                     step:
+ *                       type: string
+ *                     order:
+ *                       type: integer
  *     responses:
  *       200:
  *         description: Recipe updated successfully
  *       404:
  *         description: Recipe not found
  */
-router.put('/:id', authenticate, updateRecipe);
+router.put('/:id', authenticate, updateRecipeController);
 
 /**
  * @swagger
@@ -138,6 +178,6 @@ router.put('/:id', authenticate, updateRecipe);
  *       404:
  *         description: Recipe not found
  */
-router.delete('/:id', authenticate, deleteRecipe);
+router.delete('/:id', authenticate, deleteRecipeController);
 
 export default router;
