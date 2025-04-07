@@ -3,13 +3,14 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import authRoutes from './routes/auth.routes';
 import recipeRoutes from './routes/recipeRoutes';
-import { setupSwagger } from './config/swagger'; // Import Swagger setup
+import { setupSwagger } from './config/swagger';
 import ingredientRoutes from './routes/Ingredient.routes';
 import allergyRoutes from './routes/allergy.routes';
 import dislikeRoutes from './routes/dislike.routes';
 import recipeIngredientRoutes from './routes/recipeIngredientRoutes';
 import userRoutes from './routes/user.routes';
 import preferenceRoutes from './routes/preference.routes';
+import labsRoutes from './routes/labs.routes';
 
 dotenv.config();
 
@@ -36,6 +37,7 @@ app.use('/dislikes', dislikeRoutes);
 app.use('/recipe-ingredients', recipeIngredientRoutes);
 app.use('/preferences', preferenceRoutes);
 app.use('/users', userRoutes);
+app.use('/labs-recipe', labsRoutes);
 
 // Setup Swagger
 setupSwagger(app);
