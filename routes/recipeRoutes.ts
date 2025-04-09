@@ -103,7 +103,7 @@ router.get('/:id', authenticate, getRecipeByIdController);
  *       400:
  *         description: Validation error
  */
-router.post('/', authenticate, createRecipeController);
+router.post('/', createRecipeController);
 
 /**
  * @swagger
@@ -157,7 +157,7 @@ router.post('/', authenticate, createRecipeController);
  *       404:
  *         description: Recipe not found
  */
-router.put('/:id', authenticate, updateRecipeController);
+router.put('/:id', updateRecipeController);
 
 /**
  * @swagger
