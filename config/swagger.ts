@@ -22,7 +22,7 @@ const options = {
         },
         servers: [
             {
-                url: 'http://localhost:5000', // Update this to match your server URL
+                url: 'https://be-m76b.onrender.com/', // Update this to match your server URL
             },
         ],
         security: [{ bearerAuth: [] }],
