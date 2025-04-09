@@ -17,13 +17,19 @@ export const generateRecipeController = async (
             return;
         }
 
+        // Convert userId from string to number
+        const numericUserId = Number(userId);
+        if (Number.isNaN(numericUserId)) {
+            res.status(400).json({ message: 'Invalid userId format.' });
+            return;
+        }
+
         // Call the service layer to generate the recipe.
-        const recipe = await generateRecipe(craving, userId);
+        const recipe = await generateRecipe(craving, numericUserId);
 
         // Send back the recipe.
         res.status(200).json(recipe);
     } catch (error: any) {
-        // Pass the error to Express' error handling middleware.
         next(error);
     }
 };

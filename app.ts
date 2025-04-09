@@ -10,6 +10,7 @@ import dislikeRoutes from './routes/dislike.routes';
 import recipeIngredientRoutes from './routes/recipeIngredientRoutes';
 import userRoutes from './routes/user.routes';
 import preferenceRoutes from './routes/preference.routes';
+import savedRecipeRoutes from './routes/saveRecipe.routes';
 import labsRoutes from './routes/labs.routes';
 
 dotenv.config();
@@ -38,6 +39,8 @@ app.use('/recipe-ingredients', recipeIngredientRoutes);
 app.use('/preferences', preferenceRoutes);
 app.use('/users', userRoutes);
 app.use('/labs-recipe', labsRoutes);
+app.use('/saved-recipes', savedRecipeRoutes);
+
 
 // Setup Swagger
 setupSwagger(app);
